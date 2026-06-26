@@ -6,7 +6,7 @@ describe("Updating user", () => {
 
   beforeEach(async () => {
     await User.deleteMany({});
-    robin = new User({ name: "Robin", postCount: 11 });
+    robin = new User({ name: "Robin", likes: 11 });
     await robin.save();
   });
 
@@ -40,8 +40,8 @@ describe("Updating user", () => {
     await assertName("Das");
   });
   it("post count incrementing using $inc", async () => {
-    await User.updateMany({ name: "Robin" }, { $inc: { postCount: 1 } });
+    await User.updateMany({ name: "Robin" }, { $inc: { likes: 1 } });
     const users = await User.find({});
-    assert(users[0].postCount === 12);
+    assert(users[0].likes === 12);
   });
 });
