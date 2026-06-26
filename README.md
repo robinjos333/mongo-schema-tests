@@ -1,7 +1,9 @@
 # mongo-schema-tests
 
-clone the repo
+Prerequistes - you need to have a mongodb installed
 
-install packages using command - npm install
+Clone the repo
 
-to run the application - npm run test
+Install packages using command - npm install
+
+To run the application - npm run test
