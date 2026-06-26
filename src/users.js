@@ -17,6 +17,7 @@ const UserSchema = new Schema({
     },
   },
   postCount: Number,
+  posts: [PostSchema],
 });
 
 const User = mongoose.model("user", UserSchema);

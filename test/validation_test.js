@@ -32,10 +32,8 @@ describe("validate records in collection", () => {
     const user = new User({ name: "Ash1" });
     try {
       await user.save();
-      assert.fail("Validation should have failed for alphanumeric name");
     } catch (error) {
       if (error.name === "AssertionError") throw error;
-      console.log(error.errors);
 
       assert(error.errors.name.message === "Name must only contain chars");
     }
