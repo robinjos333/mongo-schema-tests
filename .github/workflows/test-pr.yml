@@ -1,0 +1,36 @@
+name: Test Pull Requests
+
+# Trigger this workflow only on pull requests to the main branch
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download the code from the PR branch
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Match this to your local Node version
+          cache: "npm"
+
+      # 3. Spin up an isolated MongoDB database services
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.11.0
+        with:
+          mongodb-version: "6.0"
+
+      # 4. Install project dependencies (Faster and stricter than 'npm install')
+      - name: Install Dependencies
+        run: npm ci
+
+      # 5. Execute your testing framework
+      - name: Run Test Suite
+        run: npm test
