@@ -13,7 +13,9 @@ before((done) => {
     });
 });
 
-beforeEach((done) => {
-  mongoose.connection.collections.users.drop();
-  done();
+beforeEach(async () => {
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  await users.drop();
+  await comments.drop();
+  await blogposts.drop();
 });
