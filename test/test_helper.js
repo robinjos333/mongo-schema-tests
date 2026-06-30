@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
+// Example helper connection logic
+const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/test_db";
 
 before((done) => {
-  mongoose.connect("mongodb://localhost/users_test");
+  mongoose.connect(mongoUri);
   mongoose.connection
     .once("open", () => {
       done();

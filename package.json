@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec \"npx mocha -R min\""
+    "test": "mocha -R min --exit",
+    "test:watch": "nodemon --exec \"npx mocha -R min\""
   },
   "author": "",
   "license": "ISC",
