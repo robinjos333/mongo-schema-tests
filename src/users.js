@@ -19,15 +19,28 @@ const UserSchema = new Schema({
   // postCount: Number,
   posts: [PostSchema],
   likes: Number,
-  blogPosts: [{
-    type: Schema.Types.ObjectId,
-    ref: "blogPost"
-  }]
+  blogPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "blogPost",
+    },
+  ],
 });
 
 UserSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
+
+UserSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function () {
+    const BlogPost = mongoose.model("blogPost");
+
+    // Use deleteMany instead of remove
+    await BlogPost.deleteMany({ _id: { $in: this.blogPosts } });
+  },
+);
 
 const User = mongoose.model("user", UserSchema);
 
