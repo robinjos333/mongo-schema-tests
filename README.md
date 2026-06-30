@@ -26,7 +26,7 @@ Ensure you have the following installed on your local machine:
 
    ```bash
    git clone https://github.com/robinjos333/mongo-schema-tests.git
-   cd users
+   cd mongo-schema-tests
    ```
 
 2. **Install dependencies:**
